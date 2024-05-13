@@ -26,5 +26,17 @@ class Appointment{
     }
 }
 function bookAppointment(doctor,patient) {
- const availableDoc =doctor.availability.filter(date => !patient.condition.include(date))   
+ const availableDoc =doctor.availability.filter(date => !patient.condition.include(date))
+ if(availableDoc.length>0){
+ const appointmentDate= appointmentDate[0]
+ const appointment = new Appointment(doctor,patient,appointmentDate)  
+ console.log(`appointment for ${patient.name}with ${doctor.name}at ${appointmentDate}`);
+ return appointment
+ } else {
+    console.log("no appointment at this time");
+ }
 }
+
+const drAgnes = new Doctor("Dr.Agnes","gynaecologist"["14-5-2024","16-5-2024","20-5-2024"] )
+const patientAjema =new Patient("Aggy Ajema",["15-5-2024","17-5-2024","21-5-2024"])
+const appointment = bookAppointment(drAgnes,patientAjema)
